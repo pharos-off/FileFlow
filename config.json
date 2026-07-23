@@ -1,0 +1,12 @@
+{
+  "sortByDate": false,
+  "dateGrouping": "year",
+  "detectDuplicates": true,
+  "duplicateAction": "duplicates",
+  "renameFiles": false,
+  "renamePattern": "{date}_{time}",
+  "cleanTemporaryFiles": false,
+  "createLogs": true,
+  "createUndoHistory": true,
+  "ignoreHiddenFiles": true
+}

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FileFlow</title><link rel="stylesheet" href="style.css"></head>
+<body>
+  <main>
+    <header><div class="mark">↳</div><div><h1>FileFlow</h1><p>Un espace plus net, sans perdre un seul fichier.</p></div><span class="offline">● 100 % local</span></header>
+    <section class="panel setup"><h2>Quel dossier souhaitez-vous organiser ?</h2><div class="folder-row"><input id="folder" type="text" placeholder="C:\\Users\\vous\\Downloads" autocomplete="off"><button id="preview">Prévisualiser</button></div><p class="hint">Collez le chemin complet du dossier. FileFlow ne modifie rien avant votre confirmation.</p>
+      <div class="options"><label><input id="date" type="checkbox"> Trier par date</label><label><input id="month" type="checkbox" disabled> Par mois</label><label><input id="rename" type="checkbox"> Renommer avec la date</label><label><input id="duplicates" type="checkbox" checked> Détecter les doublons</label><label><input id="clean" type="checkbox"> Nettoyer les fichiers temporaires</label><label><input id="recursive" type="checkbox"> Inclure les sous-dossiers</label></div>
+    </section>
+    <section id="result" hidden><div class="summary panel"><div><strong id="total">0</strong><span>fichiers trouvés</span></div><div><strong id="moves">0</strong><span>déplacements</span></div><div><strong id="dupes">0</strong><span>doublons</span></div><div><strong id="deletes">0</strong><span>suppressions</span></div></div>
+      <div class="panel"><div class="section-title"><h2>Aperçu des changements</h2><span id="status">Mode aperçu · aucun fichier modifié</span></div><div id="categories" class="categories"></div><div id="operations" class="operations"></div><div class="actions"><button id="undo" class="secondary">↶ Annuler la dernière exécution</button><button id="apply" class="danger">Confirmer les changements</button></div></div>
+    </section>
+    <p id="message" role="status"></p>
+  </main><script src="app.js"></script>
+</body></html>

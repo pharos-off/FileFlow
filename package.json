@@ -1,0 +1,14 @@
+{
+  "name": "fileflow",
+  "version": "1.0.0",
+  "description": "Offline, safe and extensible file organizer.",
+  "type": "module",
+  "bin": { "fileflow": "./src/index.js" },
+  "scripts": {
+    "start": "node src/app.js",
+    "cli": "node src/index.js",
+    "test": "node --test"
+  },
+  "license": "MIT",
+  "engines": { "node": ">=18" }
+}

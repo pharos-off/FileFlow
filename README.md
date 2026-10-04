@@ -20,6 +20,8 @@ FileFlow est une application open source qui analyse un dossier, classe ses fich
 - Nettoyage optionnel de fichiers temporaires (`.tmp`, `.bak`, `.old`, `.cache`, `Thumbs.db`, `.DS_Store`).
 - Journalisation et historique des déplacements.
 - Annulation de la dernière exécution.
+- Prévalidation des opérations et restauration automatique des déplacements en cas d’échec.
+- La confirmation applique le plan prévisualisé et refuse les fichiers modifiés depuis l’analyse.
 
 ## Installation
 
@@ -70,6 +72,8 @@ npm run cli -- "C:\Users\Vous\Downloads" --undo
 ```
 
 > Les suppressions de fichiers temporaires ou de doublons ne peuvent pas être restaurées. Vérifiez toujours l’aperçu avant de confirmer.
+
+Lors d’une analyse, les dossiers internes `history/` et `logs/` ainsi que le fichier de configuration racine `config.json` sont ignorés.
 
 ## Utilisation en ligne de commande
 

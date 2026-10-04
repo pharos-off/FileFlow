@@ -3,6 +3,8 @@ import { access } from 'node:fs/promises';
 import { categoryLabel } from './mime.js';
 import { formatDate, formatTime, sanitizeName } from './utils.js';
 
+export const isTemporaryFile = file => /(^\.DS_Store$|^Thumbs\.db$|\.(tmp|bak|old|cache)$)/i.test(file.name);
+
 function dateFolder(date, grouping) {
   if (grouping === 'month') return new Intl.DateTimeFormat('fr-FR', { month: 'long' }).format(date).replace(/^./, c => c.toUpperCase());
   return String(date.getFullYear());
@@ -14,11 +16,20 @@ function renamed(file, config) {
     .replaceAll('{name}', path.basename(file.name, ext));
   return `${sanitizeName(stem)}${ext.toLowerCase()}`;
 }
-async function exists(file) { try { await access(file); return true; } catch { return false; } }
+async function exists(file) {
+  try {
+    await access(file);
+    return true;
+  } catch (error) {
+    if (error.code === 'ENOENT') return false;
+    throw error;
+  }
+}
 export async function buildPlan(files, folder, config, duplicateGroups = []) {
   const duplicatePaths = new Set(duplicateGroups.flatMap(group => group.slice(1).map(file => file.path)));
   const claimed = new Set(); const operations = [];
   for (const file of files) {
+    if (config.cleanTemporaryFiles && isTemporaryFile(file)) continue;
     const duplicate = duplicatePaths.has(file.path);
     if (duplicate && config.duplicateAction === 'ignore') continue;
     if (duplicate && config.duplicateAction === 'delete') { operations.push({ type: 'delete', source: file.path, file }); continue; }

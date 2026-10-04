@@ -7,6 +7,10 @@ export async function scan(folder, { recursive = false, ignoreHiddenFiles = true
   async function visit(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       if (ignoreHiddenFiles && entry.name.startsWith('.')) continue;
+      if (path.resolve(directory) === path.resolve(folder)) {
+        if (entry.isDirectory() && ['history', 'logs'].includes(entry.name.toLowerCase())) continue;
+        if (entry.isFile() && entry.name.toLowerCase() === 'config.json') continue;
+      }
       const fullPath = path.join(directory, entry.name);
       if (entry.isDirectory()) { if (recursive) await visit(fullPath); continue; }
       if (!entry.isFile()) continue;
